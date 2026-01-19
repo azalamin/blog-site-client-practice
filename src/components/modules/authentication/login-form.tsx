@@ -1,11 +1,21 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldDescription, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 export function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
+	const handleLoginWithGoogle = async () => {
+		const data = await authClient.signIn.social({
+			provider: "google",
+			callbackURL: "http://localhost:3000",
+		});
+	};
+
 	return (
 		<div className={cn("flex flex-col gap-6", className)} {...props}>
 			<Card>
@@ -34,7 +44,7 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
 							</Field>
 							<Field>
 								<Button type='submit'>Login</Button>
-								<Button variant='outline' type='button'>
+								<Button onClick={() => handleLoginWithGoogle()} variant='outline' type='button'>
 									Login with Google
 								</Button>
 								<FieldDescription className='text-center'>
