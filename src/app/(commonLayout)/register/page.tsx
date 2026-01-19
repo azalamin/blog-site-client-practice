@@ -1,4 +1,4 @@
-import { RegisterForm } from "@/components/authentication/signup-form";
+import { RegisterForm } from "@/components/modules/authentication/signup-form";
 
 export default function RegisterPange() {
 	return (
