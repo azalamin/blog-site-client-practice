@@ -27,11 +27,28 @@ export const blogService = {
 			}
 
 			const res = await fetch(url.toString(), config);
+
 			const data = await res.json();
 
-			if (data.success) {
-				return { data: data?.data, error: null };
+			if (!data.success) {
+				return { data: null, error: { message: "No Data found" } };
 			}
+
+			return { data: data.data, error: null };
+		} catch (error) {
+			return { data: null, error: { message: "Something went wrong!" } };
+		}
+	},
+	getBlogPostById: async function (id: string) {
+		try {
+			const res = await fetch(`${env.API_URL}/posts/${id}`);
+			const data = await res.json();
+
+			if (!data.success) {
+				return { data: null, error: { message: "No Data found" } };
+			}
+
+			return { data: data?.data, error: null };
 		} catch (error) {
 			return { data: null, error: { message: "Something went wrong!" } };
 		}

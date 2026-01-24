@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function BlogCard({ post }: { post: BlogPost }) {
 	return (
-		<Link href={`/posts/${post.id}`} className='block'>
+		<Link href={`/blogs/${post.id}`} className='block'>
 			<Card className='group h-full overflow-hidden transition-all hover:-translate-y-1 hover:shadow-xl'>
 				<div className='relative h-48 w-full overflow-hidden bg-muted'>
 					{post.thumbnail ? (
