@@ -1,8 +1,21 @@
 import NotFound from "@/app/not-found";
 import { Badge } from "@/components/ui/badge";
 import { blogService } from "@/services/blog.service";
+import { BlogPost } from "@/types";
 import { Eye, MessageCircle, Star } from "lucide-react";
 import Image from "next/image";
+
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+	const { data } = await blogService.getBlogPost();
+
+	return data.allPost
+		.map((post: BlogPost) => ({
+			id: post.id,
+		}))
+		.splice(0, 3);
+}
 
 export default async function BlogPage({ params }: { params: Promise<{ id: string }> }) {
 	const { id } = await params;

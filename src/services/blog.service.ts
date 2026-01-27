@@ -4,7 +4,7 @@ import { BlogServiceOptions, GetBlogsParams } from "@/types";
 const API_URL = env.API_URL;
 
 export const blogService = {
-	getBlogPost: async function (params: GetBlogsParams, options: BlogServiceOptions) {
+	getBlogPost: async function (params?: GetBlogsParams, options?: BlogServiceOptions) {
 		try {
 			const url = new URL(`${API_URL}/posts`);
 
@@ -18,11 +18,11 @@ export const blogService = {
 
 			const config: RequestInit = {};
 
-			if (options.cache) {
+			if (options?.cache) {
 				config.cache = options.cache;
 			}
 
-			if (options.revalidate) {
+			if (options?.revalidate) {
 				config.next = { revalidate: options.revalidate };
 			}
 
